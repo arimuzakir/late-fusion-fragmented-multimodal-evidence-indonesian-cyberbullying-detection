@@ -1,4 +1,4 @@
-# Coverage-Aware Learning from Fragmented Multimodal Evidence for Child-Directed Cyberbullying Detection
+# Coverage-Aware Late Fusion of Fragmented Evidence for Indonesian Child-Directed Cyberbullying Detection
 
 **Implementation and Reproducibility Artifacts**
 
@@ -6,7 +6,7 @@
 
 ## Overview
 
-This repository provides the official implementation, replication scripts, and reproducibility artifacts for the research on detecting child-directed cyberbullying from fragmented multimodal evidence.
+This repository provides the official implementation, replication scripts, and reproducibility artifacts for the research on detecting Indonesian child-directed cyberbullying from fragmented multimodal evidence.
 
 All evaluations are conducted on an audited benchmark corpus of 13,307 social media entries across YouTube, Twitter/X, Instagram, and Facebook under a 5-fold stratified cross-validation scheme with nested calibration splits to eliminate data leakage.
 
@@ -47,6 +47,10 @@ coverage-aware-multimodal-cyberbullying/
 |   |-- notebook_qmf2023_baseline.ipynb     # QMF (ICML 2023) decision-level fusion baseline
 |   `-- notebook_lopo_v12.ipynb             # Leave-One-Platform-Out evaluation
 |-- src/                                    # Python source code modules
+|   |-- vendor/                             # Third-party benchmark implementations
+|   |   |-- healnet_checked.py              # HEALNet (NeurIPS 2024) architecture
+|   |   |-- healnet_official.py             # Reference implementation
+|   |   `-- HEALNET_LICENSE                 # Apache 2.0 License
 |   |-- revision_train.py                   # Multimodal neural network architectures
 |   |-- revision_core.py                    # Evaluation pipeline and late fusion meta-learners
 |   |-- revision_baselines.py               # HEALNet and Early Fusion Concat implementations
@@ -95,7 +99,7 @@ python regenerate_tables.py
 
 ```bibtex
 @article{cyberbullying2026coverage,
-  title={Coverage-Aware Learning from Fragmented Multimodal Evidence for Child-Directed Cyberbullying Detection},
+  title={Coverage-Aware Late Fusion of Fragmented Evidence for Indonesian Child-Directed Cyberbullying Detection},
   year={2026}
 }
 ```
