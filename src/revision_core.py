@@ -1,4 +1,4 @@
-"""Reviewer experiment protocol. No test-label use in training or selection."""
+"""Multimodal evaluation and late-fusion stacking protocol. No test-label leakage in training, meta-fit, or calibration."""
 
 from pathlib import Path
 import os, re, json, hashlib, random, sys, platform, warnings
@@ -23,7 +23,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.neural_network import MLPClassifier
 from scipy.stats import binomtest
 
-VERSION = "v12-reviewer-1"
+VERSION = "v12.0"
 BRANCHES = ["indobert", "indobertweet", "mbert", "transcript", "visual"]
 
 

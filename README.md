@@ -40,40 +40,40 @@ Key observations:
 
 ```text
 coverage-aware-multimodal-cyberbullying/
-├── notebooks/                              # Executed Jupyter notebooks with complete outputs
-│   ├── 00_persiapan_runtime.ipynb          # Runtime configuration and split validation
-│   ├── notebook_multimodal_v12.ipynb       # Main 17 multimodal models training and evaluation
-│   ├── notebook_baselines_v12.ipynb        # 7 Baseline models (TF-IDF, Concat, HEALNet NeurIPS 2024)
-│   ├── IJIES_20265495_QMF2023_BASELINE_MAIN.ipynb # QMF (ICML 2023) decision-level fusion baseline
-│   └── notebook_lopo_v12.ipynb             # Leave-One-Platform-Out evaluation
-├── src/                                    # Python source code modules
-│   ├── revision_train.py                   # Multimodal neural network architectures
-│   ├── revision_core.py                    # Evaluation pipeline and late fusion meta-learners
-│   ├── revision_baselines.py               # HEALNet and Early Fusion Concat implementations
-│   └── predict_realtime.py                 # Standalone real-time inference engine
-├── reproducibility_artifacts/              # Auditability artifacts (Reviewer 1 requirements)
-│   ├── partition_assignments.csv           # 5-fold cross-validation partition assignments
-│   ├── splits.json                         # Cross-validation index partitions
-│   ├── modality_masks.csv                  # Nominal and effective decodable coverage masks
-│   ├── coverage.json                       # Modality coverage breakdown
-│   ├── all_model_predictions.csv           # Out-of-fold probabilities, thresholds, and predictions (all 24 models + QMF)
-│   ├── base_probabilities_test.csv         # Out-of-fold probability predictions
-│   └── thresholds.json                     # Calibrated decision thresholds
-├── reports_and_metrics/                    # Numerical evaluation tables
-│   ├── table2_metrics.csv                  # Complete 24-model metrics
-│   ├── table3_per_class.csv                # Per-class performance breakdown
-│   ├── table_qmf_metrics.csv               # QMF (ICML 2023) evaluation metrics
-│   ├── qmf_fold_metrics.csv                # QMF fold-wise breakdown
-│   ├── fold_metrics.csv                    # Metrics across Folds 1 to 5
-│   └── fusion_seed_stability.csv           # Multi-seed stability (Seeds 42, 43, 44)
-├── figures/                                # Publication-ready figures
-│   ├── roc.png                             # ROC curves across model configurations
-│   ├── precision_recall.png                # Precision-Recall curves
-│   └── confusion_full_lr.png               # Confusion matrix visual plot
-├── regenerate_tables.py                    # Verification script (reproduces Table 2 and Table 3)
-├── requirements.txt                        # Dependencies specification
-├── LICENSE                                 # MIT License
-└── README.md                               # Repository documentation
+|-- notebooks/                              # Executed Jupyter notebooks with complete outputs
+|   |-- 00_persiapan_runtime.ipynb          # Runtime configuration and split validation
+|   |-- notebook_multimodal_v12.ipynb       # Main 17 multimodal models training and evaluation
+|   |-- notebook_baselines_v12.ipynb        # 7 Baseline models (TF-IDF, Concat, HEALNet NeurIPS 2024)
+|   |-- notebook_qmf2023_baseline.ipynb     # QMF (ICML 2023) decision-level fusion baseline
+|   `-- notebook_lopo_v12.ipynb             # Leave-One-Platform-Out evaluation
+|-- src/                                    # Python source code modules
+|   |-- revision_train.py                   # Multimodal neural network architectures
+|   |-- revision_core.py                    # Evaluation pipeline and late fusion meta-learners
+|   |-- revision_baselines.py               # HEALNet and Early Fusion Concat implementations
+|   `-- predict_realtime.py                 # Standalone real-time inference engine
+|-- reproducibility_artifacts/              # Auditability artifacts (data splits, out-of-fold predictions, calibration)
+|   |-- partition_assignments.csv           # 5-fold cross-validation partition assignments
+|   |-- splits.json                         # Cross-validation index partitions
+|   |-- modality_masks.csv                  # Nominal and effective decodable coverage masks
+|   |-- coverage.json                       # Modality coverage breakdown
+|   |-- all_model_predictions.csv           # Out-of-fold probabilities, thresholds, and predictions (all 24 models + QMF)
+|   |-- base_probabilities_test.csv         # Out-of-fold probability predictions
+|   `-- thresholds.json                     # Calibrated decision thresholds
+|-- reports_and_metrics/                    # Numerical evaluation tables
+|   |-- table2_metrics.csv                  # Complete 24-model metrics
+|   |-- table3_per_class.csv                # Per-class performance breakdown
+|   |-- table_qmf_metrics.csv               # QMF (ICML 2023) evaluation metrics
+|   |-- qmf_fold_metrics.csv                # QMF fold-wise breakdown
+|   |-- fold_metrics.csv                    # Metrics across Folds 1 to 5
+|   `-- fusion_seed_stability.csv           # Multi-seed stability (Seeds 42, 43, 44)
+|-- figures/                                # Publication-ready evaluation plots
+|   |-- roc.png                             # ROC curves across model configurations
+|   |-- precision_recall.png                # Precision-Recall curves
+|   `-- confusion_full_lr.png               # Confusion matrix visual plot
+|-- regenerate_tables.py                    # Verification script (reproduces Table 2 and Table 3)
+|-- requirements.txt                        # Dependencies specification
+|-- LICENSE                                 # MIT License
+`-- README.md                               # Repository documentation
 ```
 
 ---
