@@ -1,4 +1,4 @@
-"""Controlled baselines on the exact V12 roles. HEALNet uses official fusion code."""
+"""Controlled baseline models (TF-IDF, Early Fusion Concat, and HEALNet NeurIPS 2024) on identical 5-fold cross-validation partitions."""
 
 from pathlib import Path
 import copy, importlib.util, json, os

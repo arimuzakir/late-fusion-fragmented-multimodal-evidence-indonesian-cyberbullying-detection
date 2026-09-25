@@ -1,9 +1,9 @@
 """
-ENGINE INFERENSI REAL-TIME: DETEKSI CYBERBULLYING MULTIMODAL PADA ANAK
-Model: full_mlp_seed44 (Multimodal Late Fusion MLP - Model Terbaik Tesis)
-Fallback: text_mlp_seed44 / indobert (Untuk input teks murni tanpa media)
+REAL-TIME INFERENCE ENGINE: CHILD-DIRECTED MULTIMODAL CYBERBULLYING DETECTION
+Primary Model: full_mlp_seed44 (Tri-Modal Late Fusion MLP Meta-Learner)
+Fallback: text_mlp_seed44 / indobert (Unimodal text fallback when media is absent)
 
-Penggunaan Cepat:
+Quick Usage:
     from predict_realtime import CyberbullyingInferenceEngine
     
     engine = CyberbullyingInferenceEngine()

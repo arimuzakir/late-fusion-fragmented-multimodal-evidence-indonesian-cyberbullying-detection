@@ -1,4 +1,4 @@
-"""Five V11 branches re-trained with protected outer test partitions."""
+"""Multimodal branch neural network encoders fine-tuning with strictly partitioned 5-fold cross-validation."""
 
 from pathlib import Path
 import contextlib, gc, json, math, os, random, shutil, time
