@@ -1,122 +1,152 @@
 # Late Fusion under Fragmented Multimodal Evidence for Indonesian Cyberbullying Detection
 
-Official reproduction package and benchmark artifacts for the manuscript:
+Research repository for the manuscript “Late Fusion under Fragmented Multimodal Evidence for Indonesian Cyberbullying Detection.”
 
-> **Late Fusion under Fragmented Multimodal Evidence for Indonesian Cyberbullying Detection**  
-> Ari Muzakir, Usman Ependi, Suyanto (2026)  
-> Universitas Bina Darma, Palembang, Indonesia  
-> Contact: `arimuzakir@binadarma.ac.id`
+## Overview
 
----
+This project evaluates Indonesian cyberbullying detection under fragmented multimodal evidence across social media comments and video windows. The study benchmarks unimodal text, visual, and acoustic representations against late fusion architectures, including equal fusion, availability-aware fusion with modality flags, HEALNet adaptation (NeurIPS 2024), and SigLIP 2 vision-language probes (Google 2025).
 
-## 1. Overview and Reproducibility Tiers
+The primary evaluation protocol spans two corpora under strict source-disjoint partitioning:
+- 8,196 eligible text comments (Train: 5,741; Validation: 1,229; Test: 1,226).
+- 3,951 aligned video segments evaluated through 4-fold grouped nested cross-validation with non-overlapping fit, early stopping, meta-fitting, calibration, and test roles across three training seeds (42, 2026, 2027).
 
-This repository provides evaluation manifests, out-of-fold predictions, statistical tests, and scripts to reproduce all findings reported in the manuscript. We distinguish two reproducibility tiers:
+## Experimental configurations
 
-- **Level 1 (Evaluation and Metric Reproduction — CPU)**  
-  Recomputes all metrics, confusion matrices, cluster-bootstrap confidence intervals (95% CI), hypothesis tests, Tables 1–3, and empirical Figures 4–8 directly from stored out-of-fold predictions.  
-  *Execution time: ~3.4 seconds total on a standard CPU (verified in a clean clone environment).*  
-  *Scope note: Figures 1–3 are conceptual method and architecture diagrams bundled as publication assets from manuscript OpenXML media, whereas Figures 4–8 are programmatically regenerated from data.*
+### Unimodal baselines
+- Majority class
+- Extracted text (IndoBERT-base-p2 fine-tuned per fold)
+- Visual only (EfficientNet-B0 fine-tuned per fold)
+- Acoustic only (Ridge classifier on audio feature vectors)
 
-- **Level 2 (End-to-End Retraining — GPU Required)**  
-  Retrains unimodal encoders and late fusion models from source data using `notebooks/run_experiments.ipynb`. Due to privacy protections on human subjects and repository size limits, raw social media video files, raw audio WAVs, and large pretrained checkpoints (475 MB per model) are maintained separately and not bundled into this Git release.
+### Late fusion and control models
+- Equal visual–acoustic (Equal VA)
+- Equal visual–acoustic–text (Equal VAT)
+- Visual–acoustic logistic regression (VA LR)
+- Visual–acoustic–text logistic regression (VAT LR)
+- LR with extraction flags (VAT + binary OCR/STT flags)
+- LR with availability features (Availability-aware VAT)
+- Coverage-only control (Modality presence features without content)
+- Shuffled coverage control (Permuted coverage features)
+- Feature-concatenation MLP (Concatenated branch features)
 
----
+### Representation and architecture baselines
+- HEALNet adaptation (Official NeurIPS 2024 architecture adapted to frozen representations)
+- SigLIP 2 visual probe (Pretrained vision encoder + linear probe)
+- SigLIP 2 visual–text probe (Multimodal vision-language probe)
+- SigLIP 2 VTA probe (Vision-text probe with acoustic feature augmentation)
 
-## 2. Quickstart
+## Final reported results
 
-### Setup
+### Table 1: Population and evidence accounting
+| Population | Records | Negative (Non-Bullying) | Positive (Bullying) |
+|---|:---:|:---:|:---:|
+| Master source collection | 13,307 | 6,057 | 7,250 |
+| Comment source population | 8,906 | 4,260 | 4,646 |
+| Eligible high-agreement comments | 8,196 | 3,799 | 4,397 |
+| Comment test population | 1,226 | 555 | 671 |
+| Video source population | 4,401 | 1,797 | 2,604 |
+| Aligned video evaluation population | 3,951 | 1,627 | 2,324 |
+
+*Video extraction availability breakdown (N = 3,951)*: Both OCR and STT: 1,275 (32.3%); STT only: 1,231 (31.2%); OCR only: 760 (19.2%); Zero text extracted: 685 (17.3%).
+
+### Table 2: Held-out comment results (1,226 test comments, Seed 42)
+| Model | Accuracy | Macro F1 | ROC-AUC | Average Precision |
+|---|:---:|:---:|:---:|:---:|
+| Word/character TF-IDF + LR | 0.9364 | 0.9359 | 0.9870 | 0.9904 |
+| IndoBERT-base-p2 | 0.9608 | 0.9604 | 0.9920 | 0.9944 |
+| IndoBERTweet | 0.9527 | 0.9524 | 0.9849 | 0.9807 |
+| Multilingual BERT | 0.9600 | 0.9598 | 0.9880 | 0.9923 |
+| Equal text ensemble | 0.9666 | 0.9663 | 0.9932 | 0.9955 |
+
+### Table 3: Controlled video comparison (3,951 video windows, 4-fold grouped OOF)
+| Configuration | F1 selected | F1 at 0.50 | F1 mean ± SD | ROC-AUC | AP |
+|---|:---:|:---:|:---:|:---:|:---:|
+| Majority class | 0.3704 | 0.3704 | 0.3704 ± 0.0000 | 0.4701 | 0.5721 |
+| Extracted text | 0.5589 | 0.5615 | 0.5560 ± 0.0067 | 0.5862 | 0.6610 |
+| Visual only | 0.5281 | 0.4911 | 0.5228 ± 0.0141 | 0.5276 | 0.6082 |
+| Acoustic only | 0.5073 | 0.3964 | 0.5073 ± 0.0000 | 0.5082 | 0.6010 |
+| Equal visual–acoustic | 0.5228 | 0.4036 | 0.5174 ± 0.0073 | 0.5232 | 0.6032 |
+| Equal visual–acoustic–text | 0.5615 | 0.5176 | 0.5559 ± 0.0085 | 0.5842 | 0.6553 |
+| Visual–acoustic LR | 0.5164 | 0.3734 | 0.5081 ± 0.0104 | 0.5258 | 0.6063 |
+| Visual–acoustic–text LR | 0.5120 | 0.3770 | 0.5084 ± 0.0059 | 0.5173 | 0.5993 |
+| LR with extraction flags | 0.5135 | 0.3858 | 0.5142 ± 0.0127 | 0.5210 | 0.6060 |
+| LR with availability features | 0.5081 | 0.4187 | 0.5174 ± 0.0103 | 0.5169 | 0.6026 |
+| Coverage only | 0.4939 | 0.3704 | 0.4939 ± 0.0000 | 0.5081 | 0.5979 |
+| Shuffled coverage control | 0.5097 | 0.3952 | 0.5060 ± 0.0034 | 0.5205 | 0.6048 |
+| Feature-concatenation MLP | 0.5067 | 0.5065 | 0.5159 ± 0.0089 | 0.5079 | 0.5957 |
+| HEALNet adaptation | 0.5076 | 0.5054 | 0.5159 ± 0.0088 | 0.5186 | 0.6055 |
+| SigLIP 2 visual probe | 0.5302 | 0.5269 | 0.5302 ± 0.0000 | 0.5445 | 0.6369 |
+| SigLIP 2 visual–text probe | 0.5278 | 0.5381 | 0.5278 ± 0.0000 | 0.5598 | 0.6465 |
+| SigLIP 2 VTA probe | 0.5304 | 0.5415 | 0.5304 ± 0.0000 | 0.5632 | 0.6476 |
+
+Equal late fusion (VAT) achieves 0.5615 macro F1 at its calibrated threshold. When tested under source-paired group permutations, equal late fusion shows significant improvement over HEALNet adaptation (Δ = +0.0539, 11-contrast Holm p = 0.0165), while differences against visual-only (p = 0.2599), SigLIP 2 VTA probe (p = 0.3463), and extracted text (p = 1.0000) are not statistically significant after multiplicity adjustment.
+
+## Repository structure
+
+late-fusion-fragmented-multimodal-evidence/
+├── README.md
+├── LICENSE
+├── CITATION.cff
+├── requirements.txt
+├── configs/
+├── artifacts/
+├── src/
+│   ├── regenerate_tables.py
+│   ├── regenerate_figures.py
+│   └── vendor/
+├── results/
+│   ├── paired_statistics/
+│   ├── text/
+│   └── video/
+├── figures/
+├── notebooks/
+└── docs/
+
+## Reproduction
+
+### Environment setup
 ```bash
-git clone https://github.com/arimuzakir/late-fusion-fragmented-multimodal-evidence-indonesian-cyberbullying-detection.git
-cd late-fusion-fragmented-multimodal-evidence-indonesian-cyberbullying-detection
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Reproduce Tables (Tables 1, 2, and 3)
+### Reproduce tables and statistical tests
 ```bash
 python src/regenerate_tables.py
 ```
+This script recomputes Tables 1, 2, and 3, along with primary 7-contrast and exploratory 4-contrast Holm-adjusted paired permutation tests directly from stored out-of-fold predictions. Verified execution time: ~1.7 seconds on a standard CPU.
 
-### Reproduce Figures (Figures 4 through 8)
+### Reproduce empirical figures
 ```bash
 python src/regenerate_figures.py
 ```
+This script regenerates the empirical plots:
+- `fig_04_comment_comparison.png`: Held-out comment dot plot
+- `fig_05_fusion_differences.png`: Source-paired differences forest plot
+- `fig_06_seed_stability.png`: Multi-seed stability trajectory
+- `fig_07_extraction_availability.png`: Performance across OCR/STT strata
+- `fig_08_threshold_sensitivity.png`: Decision threshold comparison (0.50 vs calibrated)
 
----
+Figures 1, 2, and 3 are conceptual diagrams (corpus composition, fusion architecture, and nested CV protocol) extracted from the manuscript OpenXML media and provided as reference assets under `figures/`.
 
-## 3. Dataset Summary and Protocol
+### End-to-end retraining
+To re-extract features and retrain encoders from scratch on GPU hardware, execute:
+`notebooks/run_experiments.ipynb`
 
-### Population Accounting (Table 1)
-| Population | Records | Negative (Non-Bullying) | Positive (Bullying) |
-|---|:---:|:---:|:---:|
-| **Master source collection** | 13,307 | 6,057 | 7,250 |
-| **Comment source population** | 8,906 | 4,260 | 4,646 |
-| **Eligible high-agreement comments** | 8,196 | 3,799 | 4,397 |
-| **Comment test population** | 1,226 | 555 | 671 |
-| **Video source population** | 4,401 | 1,797 | 2,604 |
-| **Aligned video evaluation population** | 3,951 | 1,627 | 2,324 |
+## Checkpoints and data provenance
 
-*Video Extraction Availability Strata (N = 3,951 eligible 10s windows, stride 3s)*:
-- Both OCR and STT extracted: 1,275 (32.3%)
-- STT transcript only: 1,231 (31.2%)
-- OCR text only: 760 (19.2%)
-- Zero text extracted (Neither): 685 (17.3%)
+Out-of-fold sample predictions, decision cutoffs, and feature representations are preserved under `results/` and `artifacts/`. Intermediate `meta_fit` and `calibration` predictions were reconstructed from frozen representations and fitted meta-learners without refitting, exactly matching historical cutoffs across all 360 configurations (verified in `artifacts/recovery_validation.csv`).
 
-### Annotation Protocol and Reliability
-- **Fleiss' Kappa ($\kappa = 0.8853$)**: Evaluated across the entire master collection of $N = 13,307$ records by five independent human annotators (`anotator_1` through `anotator_5`), demonstrating almost perfect agreement under Landis & Koch (1977).
-- **Annotator Pairwise Cohen's Kappa (mean $\kappa = 0.8851$)**: Unweighted mean of all 10 bilateral annotator pairs across the same master corpus ($N = 13,307$).
-- **Inter-Expert Agreement ($\kappa = 0.9075$)**: Bilateral Cohen's kappa between two independent domain experts (Expert 1: Indonesian Forensic Linguist; Expert 2: Child Developmental Psychologist) evaluated on a stratified gold-standard subsample of $n = 1,331$ records (10.0% of the corpus). This metric reflects inter-expert agreement on the audit sample and is not a post-adjudication score for the full segment corpus.
-- **Documentary Evidence**: Annotation guidelines and phase-specific gold standards are archived in `docs/annotation_guidelines.docx`, `docs/gold_standard_phase_1.pdf`, and `docs/gold_standard_phase_2.pdf`. Master segment labels reflect majority consensus ($\ge 3/5$) without circular performance-guided relabeling.
+Due to child privacy protections and repository hosting limits, raw video files (.mp4), raw audio recordings (.wav), and large transformer weights (475 MB per model checkpoint) are not bundled in this Git release.
 
-### Disjoint Partitioning and Role Accounting
-Within each 4-fold group partition, observations strictly avoid leakage across roles:
-| Outer Fold | Fit Role | Early Stop Role | Meta-Fit Role | Calibration Role | Test Role (OOF) | Total Windows |
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| **Fold 0** | 1,621 | 266 | 404 | 423 | 1,237 | 3,951 |
-| **Fold 1** | 1,889 | 328 | 466 | 495 | 773 | 3,951 |
-| **Fold 2** | 1,890 | 314 | 466 | 476 | 805 | 3,951 |
-| **Fold 3** | 1,677 | 293 | 420 | 425 | 1,136 | 3,951 |
-| **Total** | **7,077** | **1,201** | **1,756** | **1,819** | **3,951** | **15,804** |
+## Data ethics and annotation note
 
-Decision thresholds (`thresholds.json`) were selected exclusively on the `calibration` split. Intermediate `meta_fit` and `calibration` predictions were reconstructed from frozen representations and fitted meta-models without retraining. Full verification across all 360 model-seed-fold-role configurations is documented in [`artifacts/recovery_validation.csv`](artifacts/recovery_validation.csv) with zero threshold discrepancy.
+- **Segment annotation**: Five independent native Indonesian annotators evaluated each segment. The Fleiss' kappa of 0.8853 and mean pairwise Cohen's kappa of 0.8851 were computed across the complete 13,307-record master collection. Final segment labels reflect majority voting (≥ 3/5).
+- **Expert validation**: Two domain experts (Forensic Linguistics and Child Psychology) evaluated a stratified subsample of 1,331 records, achieving an inter-expert Cohen's kappa of 0.9075. This measures expert consistency on the audit sample and is not a post-adjudication relabeling of the full segment dataset.
+- **Privacy protection**: Pre-computed features (`artifacts/siglip2_frozen_features.npz`) use consistent anonymous surrogate IDs (`CB_MASTER_XXXXX`). No raw usernames, profile URLs, or social media post identifiers are published.
 
----
-
-## 4. Manuscript Mapping
-
-- **Table 1**: Population and evidence availability accounting (`artifacts/comment_splits.csv`, `artifacts/video_alignment_audit.csv`, `artifacts/video_primary_manifest.csv`).
-- **Table 2**: Held-out comment model comparison (`results/comment_metrics.csv`).
-- **Table 3**: Controlled multimodal video comparison across 17 models and 3 random seeds (`results/video_oof_predictions.csv`, `results/video_seed_summary.csv`).
-- **Supplementary Statistical Contrasts**:
-  - *Primary Planned Contrasts (7 Baselines vs. Availability-Aware VAT)*: `results/video_primary_paired_group_statistics.csv` with `p-Holm (7 primary contrasts)`.
-  - *Exploratory Contrasts (Equal Late Fusion vs. 4 Key Baselines)*: `results/paired_statistics/video_equal_vat_paired_group_statistics.csv` with `p-Holm (4 exploratory contrasts)` and `p-Holm (11 extended contrasts)`.
-- **Figures 1–3 (Method Assets)**: System architecture, corpus creation, and protocol diagrams (`figures/fig_01_*` to `fig_03_*`).
-- **Figures 4–8 (Regenerated Empirical Plots)**: Comment comparison, fusion differences forest plot, seed stability, extraction availability, and threshold sensitivity (`figures/fig_04_*` to `fig_08_*`).
-
----
-
-## 5. Repository Structure
-
-```
-├── configs/               # Experiment parameters, environment info, model revisions
-├── artifacts/             # Manifest splits, video roles, recovery validation, feature embeddings
-├── notebooks/             # Workflow notebook for training and experiment execution
-├── src/                   # Table and figure regeneration scripts, vendor modules
-├── results/               # Out-of-fold sample predictions, aggregate metrics, paired stats
-├── figures/               # Eight publication figures matching manuscript V6
-├── docs/                  # Labeling guidelines, gold standards, statistical addenda
-├── LICENSE                # MIT License and third-party notices
-├── CITATION.cff           # Citation metadata
-└── requirements.txt       # Python dependencies
-```
-
----
-
-## 6. Citation and License
-
-If you use this benchmark, code, or experimental artifacts, please cite:
+## Citation
 
 ```bibtex
 @article{muzakir2026latefusion,
@@ -126,4 +156,6 @@ If you use this benchmark, code, or experimental artifacts, please cite:
 }
 ```
 
-This software is released under the MIT License. Adapted components from HEALNet retain their Apache 2.0 license (see `src/vendor/HEALNET_LICENSE`).
+## License
+
+This project is licensed under the MIT License (see [LICENSE](LICENSE)). Adapted components from HEALNet retain their Apache 2.0 license under `src/vendor/HEALNET_LICENSE`.
