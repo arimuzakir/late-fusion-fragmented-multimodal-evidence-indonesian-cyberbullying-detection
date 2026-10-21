@@ -1,0 +1,133 @@
+{
+  "kind": "healnet",
+  "feature_dims": [
+    1280,
+    16,
+    768
+  ],
+  "epochs": 30,
+  "training_role": "meta_fit only; fixed epochs; no outer-test or calibration labels used in fitting",
+  "seed": 42,
+  "history": [
+    {
+      "epoch": 1,
+      "meta_fit_loss": 0.7680337056517601
+    },
+    {
+      "epoch": 2,
+      "meta_fit_loss": 0.5056079402565956
+    },
+    {
+      "epoch": 3,
+      "meta_fit_loss": 0.32797398790717125
+    },
+    {
+      "epoch": 4,
+      "meta_fit_loss": 0.2911833617836237
+    },
+    {
+      "epoch": 5,
+      "meta_fit_loss": 0.1796859698370099
+    },
+    {
+      "epoch": 6,
+      "meta_fit_loss": 0.15758752264082432
+    },
+    {
+      "epoch": 7,
+      "meta_fit_loss": 0.11481207376345992
+    },
+    {
+      "epoch": 8,
+      "meta_fit_loss": 0.12209471617825329
+    },
+    {
+      "epoch": 9,
+      "meta_fit_loss": 0.07837463519535959
+    },
+    {
+      "epoch": 10,
+      "meta_fit_loss": 0.050814224989153445
+    },
+    {
+      "epoch": 11,
+      "meta_fit_loss": 0.02424182090908289
+    },
+    {
+      "epoch": 12,
+      "meta_fit_loss": 0.018212198745459318
+    },
+    {
+      "epoch": 13,
+      "meta_fit_loss": 0.022699187567923218
+    },
+    {
+      "epoch": 14,
+      "meta_fit_loss": 0.011784176647779532
+    },
+    {
+      "epoch": 15,
+      "meta_fit_loss": 0.03111533439368941
+    },
+    {
+      "epoch": 16,
+      "meta_fit_loss": 0.022196046716999263
+    },
+    {
+      "epoch": 17,
+      "meta_fit_loss": 0.014090242912061512
+    },
+    {
+      "epoch": 18,
+      "meta_fit_loss": 0.00799392320914194
+    },
+    {
+      "epoch": 19,
+      "meta_fit_loss": 0.0055176237801788375
+    },
+    {
+      "epoch": 20,
+      "meta_fit_loss": 0.005347751728550065
+    },
+    {
+      "epoch": 21,
+      "meta_fit_loss": 0.008740473189391196
+    },
+    {
+      "epoch": 22,
+      "meta_fit_loss": 0.0043215687983320095
+    },
+    {
+      "epoch": 23,
+      "meta_fit_loss": 0.004703104219515808
+    },
+    {
+      "epoch": 24,
+      "meta_fit_loss": 0.005785201530670747
+    },
+    {
+      "epoch": 25,
+      "meta_fit_loss": 0.00819846369267907
+    },
+    {
+      "epoch": 26,
+      "meta_fit_loss": 0.0036539822685881518
+    },
+    {
+      "epoch": 27,
+      "meta_fit_loss": 0.0034470807731850073
+    },
+    {
+      "epoch": 28,
+      "meta_fit_loss": 0.003073577376198955
+    },
+    {
+      "epoch": 29,
+      "meta_fit_loss": 0.0024582221667515114
+    },
+    {
+      "epoch": 30,
+      "meta_fit_loss": 0.0026261727325618267
+    }
+  ]
+}

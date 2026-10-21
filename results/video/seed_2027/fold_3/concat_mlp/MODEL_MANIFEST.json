@@ -1,0 +1,133 @@
+{
+  "kind": "concat_mlp",
+  "feature_dims": [
+    1280,
+    16,
+    768
+  ],
+  "epochs": 30,
+  "training_role": "meta_fit only; fixed epochs; no outer-test or calibration labels used in fitting",
+  "seed": 2027,
+  "history": [
+    {
+      "epoch": 1,
+      "meta_fit_loss": 0.6332968388284955
+    },
+    {
+      "epoch": 2,
+      "meta_fit_loss": 0.488238377230508
+    },
+    {
+      "epoch": 3,
+      "meta_fit_loss": 0.3844898853983198
+    },
+    {
+      "epoch": 4,
+      "meta_fit_loss": 0.30632271085466656
+    },
+    {
+      "epoch": 5,
+      "meta_fit_loss": 0.2598700055054256
+    },
+    {
+      "epoch": 6,
+      "meta_fit_loss": 0.20481569000652858
+    },
+    {
+      "epoch": 7,
+      "meta_fit_loss": 0.1747495031782559
+    },
+    {
+      "epoch": 8,
+      "meta_fit_loss": 0.17432003681148803
+    },
+    {
+      "epoch": 9,
+      "meta_fit_loss": 0.13930177369288035
+    },
+    {
+      "epoch": 10,
+      "meta_fit_loss": 0.14999085132564818
+    },
+    {
+      "epoch": 11,
+      "meta_fit_loss": 0.11614198131220681
+    },
+    {
+      "epoch": 12,
+      "meta_fit_loss": 0.11042440576212746
+    },
+    {
+      "epoch": 13,
+      "meta_fit_loss": 0.14017651868718012
+    },
+    {
+      "epoch": 14,
+      "meta_fit_loss": 0.09433936700224876
+    },
+    {
+      "epoch": 15,
+      "meta_fit_loss": 0.08764816075563431
+    },
+    {
+      "epoch": 16,
+      "meta_fit_loss": 0.08408821959580694
+    },
+    {
+      "epoch": 17,
+      "meta_fit_loss": 0.10217529269201416
+    },
+    {
+      "epoch": 18,
+      "meta_fit_loss": 0.08204852523548263
+    },
+    {
+      "epoch": 19,
+      "meta_fit_loss": 0.0747898556292057
+    },
+    {
+      "epoch": 20,
+      "meta_fit_loss": 0.07043915348393577
+    },
+    {
+      "epoch": 21,
+      "meta_fit_loss": 0.047833463842315335
+    },
+    {
+      "epoch": 22,
+      "meta_fit_loss": 0.053481299962316244
+    },
+    {
+      "epoch": 23,
+      "meta_fit_loss": 0.05380752416593688
+    },
+    {
+      "epoch": 24,
+      "meta_fit_loss": 0.05786483162747962
+    },
+    {
+      "epoch": 25,
+      "meta_fit_loss": 0.06086353531905583
+    },
+    {
+      "epoch": 26,
+      "meta_fit_loss": 0.05803429368617279
+    },
+    {
+      "epoch": 27,
+      "meta_fit_loss": 0.0408123859337398
+    },
+    {
+      "epoch": 28,
+      "meta_fit_loss": 0.05798213875719479
+    },
+    {
+      "epoch": 29,
+      "meta_fit_loss": 0.06862521144960608
+    },
+    {
+      "epoch": 30,
+      "meta_fit_loss": 0.04003501922956535
+    }
+  ]
+}

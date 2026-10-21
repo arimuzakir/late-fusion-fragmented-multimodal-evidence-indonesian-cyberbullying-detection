@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this benchmark, code, or experimental artifacts, please cite the manuscript as below."
+title: "Late Fusion under Fragmented Multimodal Evidence for Indonesian Cyberbullying Detection"
+authors:
+  - family-names: "Muzakir"
+    given-names: "Ari"
+    affiliation: "Universitas Bina Darma"
+    email: "arimuzakir@binadarma.ac.id"
+  - family-names: "Ependi"
+    given-names: "Usman"
+    affiliation: "Universitas Bina Darma"
+  - family-names: "Suyanto"
+    given-names: "Suyanto"
+    affiliation: "Universitas Bina Darma"
+type: article
+year: 2026
+keywords:
+  - "cyberbullying detection"
+  - "late fusion"
+  - "multimodal classification"
+  - "modality availability"
+  - "fragmented evidence"
+  - "Indonesian language"
+  - "source-group cross-validation"

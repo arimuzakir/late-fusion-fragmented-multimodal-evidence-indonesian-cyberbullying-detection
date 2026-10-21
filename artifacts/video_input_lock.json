@@ -1,0 +1,10 @@
+{
+  "input_hashes": {
+    "results/V6_FINAL_GPU_RUNS/canonical_efficientnet_b0_v2/CANONICAL_SPLITS.csv": "02f5a020653928f24acca442d5a4e36e2f711f258c8c4148a1f063b16f0afccd",
+    "results/V6_FINAL_GPU_RUNS/canonical_efficientnet_b0_v2/LOCKED_CONFIG.json": "0ce79a9f5ff2c941a67388a5f06bb04c79cfcf0aaa2228530be6dbaff60fdfff",
+    "features/multimodal_video_clean_metadata.csv": "42569f4ffe4d56cc785ea3b243795dc485b0aa2536462ac2881d929fcc549266",
+    "features/audio_acoustic_features.npy": "47162917b1ee171470181b9f6afd48898c50f762230c611f4e3e2aecf9ecc13e",
+    "data/multimodal/segmentation_10s_stride3_v2/multimodal_segments.csv": "8dc481e23c9e2d908cddc562ad69b3999c28ac7a52fa4cd372748c5dfa14fcee"
+  },
+  "eligible_ids_sha256": "a333bce9076ae4a36d8872d01baebe4713bf62690a769ec7f4626a378b32b69a"
+}

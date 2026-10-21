@@ -1,0 +1,133 @@
+{
+  "kind": "healnet",
+  "feature_dims": [
+    1280,
+    16,
+    768
+  ],
+  "epochs": 30,
+  "training_role": "meta_fit only; fixed epochs; no outer-test or calibration labels used in fitting",
+  "seed": 2026,
+  "history": [
+    {
+      "epoch": 1,
+      "meta_fit_loss": 0.6704771034419537
+    },
+    {
+      "epoch": 2,
+      "meta_fit_loss": 0.4310271739959717
+    },
+    {
+      "epoch": 3,
+      "meta_fit_loss": 0.26377404015511274
+    },
+    {
+      "epoch": 4,
+      "meta_fit_loss": 0.15538203436881304
+    },
+    {
+      "epoch": 5,
+      "meta_fit_loss": 0.14050983637571335
+    },
+    {
+      "epoch": 6,
+      "meta_fit_loss": 0.08414050308056176
+    },
+    {
+      "epoch": 7,
+      "meta_fit_loss": 0.07164973206818104
+    },
+    {
+      "epoch": 8,
+      "meta_fit_loss": 0.09013049956411123
+    },
+    {
+      "epoch": 9,
+      "meta_fit_loss": 0.0785490688867867
+    },
+    {
+      "epoch": 10,
+      "meta_fit_loss": 0.04326724028214812
+    },
+    {
+      "epoch": 11,
+      "meta_fit_loss": 0.0345857588108629
+    },
+    {
+      "epoch": 12,
+      "meta_fit_loss": 0.04253439500462264
+    },
+    {
+      "epoch": 13,
+      "meta_fit_loss": 0.0147418865817599
+    },
+    {
+      "epoch": 14,
+      "meta_fit_loss": 0.010141249164007604
+    },
+    {
+      "epoch": 15,
+      "meta_fit_loss": 0.006195033143740147
+    },
+    {
+      "epoch": 16,
+      "meta_fit_loss": 0.006524462776724249
+    },
+    {
+      "epoch": 17,
+      "meta_fit_loss": 0.012903283786727116
+    },
+    {
+      "epoch": 18,
+      "meta_fit_loss": 0.01367688000027556
+    },
+    {
+      "epoch": 19,
+      "meta_fit_loss": 0.012407913221977651
+    },
+    {
+      "epoch": 20,
+      "meta_fit_loss": 0.023039087827783078
+    },
+    {
+      "epoch": 21,
+      "meta_fit_loss": 0.052377043990418315
+    },
+    {
+      "epoch": 22,
+      "meta_fit_loss": 0.0299589749192819
+    },
+    {
+      "epoch": 23,
+      "meta_fit_loss": 0.014652329555246979
+    },
+    {
+      "epoch": 24,
+      "meta_fit_loss": 0.014440409140661359
+    },
+    {
+      "epoch": 25,
+      "meta_fit_loss": 0.006995825446210802
+    },
+    {
+      "epoch": 26,
+      "meta_fit_loss": 0.011193751604878344
+    },
+    {
+      "epoch": 27,
+      "meta_fit_loss": 0.0041962167306337506
+    },
+    {
+      "epoch": 28,
+      "meta_fit_loss": 0.019321003768709488
+    },
+    {
+      "epoch": 29,
+      "meta_fit_loss": 0.01720451793516986
+    },
+    {
+      "epoch": 30,
+      "meta_fit_loss": 0.010999641075613908
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "seed": 2027,
+  "outer_fold": 2,
+  "thresholds": {
+    "majority": 0.5,
+    "text": 0.35,
+    "visual": 0.575,
+    "audio": 0.675,
+    "equal_va": 0.625,
+    "equal_vat": 0.55,
+    "va_lr": 0.65,
+    "vat_lr": 0.625,
+    "vat_flags": 0.625,
+    "vat_coverage": 0.725,
+    "coverage_only": 0.75,
+    "coverage_shuffled_control": 0.625,
+    "concat_mlp": 0.75,
+    "healnet_adapted_2024": 0.825,
+    "siglip2_visual_probe": 0.325,
+    "siglip2_vt_probe": 0.275,
+    "siglip2_vta_probe": 0.1
+  },
+  "threshold_source": "calibration role only; majority fixed at 0.5",
+  "roles_n": {
+    "fit": 1890,
+    "early_stop": 314,
+    "meta_fit": 466,
+    "calibration": 476,
+    "test": 805
+  }
+}

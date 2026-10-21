@@ -1,0 +1,10 @@
+{
+  "model_id": "indolem/indobertweet-base-uncased",
+  "resolved_commit": "32e28c05b47e33b6675d2670a1745c50a65e987a",
+  "seed": 42,
+  "epochs": 4,
+  "max_length": 128,
+  "selection": "best early-stop-role macro F1 at fixed 0.5; earliest tie",
+  "fit_n": 5741,
+  "early_stop_n": 1229
+}

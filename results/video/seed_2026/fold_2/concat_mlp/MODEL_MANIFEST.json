@@ -1,0 +1,133 @@
+{
+  "kind": "concat_mlp",
+  "feature_dims": [
+    1280,
+    16,
+    768
+  ],
+  "epochs": 30,
+  "training_role": "meta_fit only; fixed epochs; no outer-test or calibration labels used in fitting",
+  "seed": 2026,
+  "history": [
+    {
+      "epoch": 1,
+      "meta_fit_loss": 0.6327573545277119
+    },
+    {
+      "epoch": 2,
+      "meta_fit_loss": 0.5145856030285358
+    },
+    {
+      "epoch": 3,
+      "meta_fit_loss": 0.3649409394711256
+    },
+    {
+      "epoch": 4,
+      "meta_fit_loss": 0.3227500393986702
+    },
+    {
+      "epoch": 5,
+      "meta_fit_loss": 0.22909577563405037
+    },
+    {
+      "epoch": 6,
+      "meta_fit_loss": 0.15357240894809365
+    },
+    {
+      "epoch": 7,
+      "meta_fit_loss": 0.10450790636241436
+    },
+    {
+      "epoch": 8,
+      "meta_fit_loss": 0.08495547669008374
+    },
+    {
+      "epoch": 9,
+      "meta_fit_loss": 0.08115440746769309
+    },
+    {
+      "epoch": 10,
+      "meta_fit_loss": 0.051001373678445816
+    },
+    {
+      "epoch": 11,
+      "meta_fit_loss": 0.05125279026106
+    },
+    {
+      "epoch": 12,
+      "meta_fit_loss": 0.03619058011099696
+    },
+    {
+      "epoch": 13,
+      "meta_fit_loss": 0.03334749082569033
+    },
+    {
+      "epoch": 14,
+      "meta_fit_loss": 0.047751576523296535
+    },
+    {
+      "epoch": 15,
+      "meta_fit_loss": 0.03283389360876754
+    },
+    {
+      "epoch": 16,
+      "meta_fit_loss": 0.03578721533995122
+    },
+    {
+      "epoch": 17,
+      "meta_fit_loss": 0.03129582293331623
+    },
+    {
+      "epoch": 18,
+      "meta_fit_loss": 0.04343316418817267
+    },
+    {
+      "epoch": 19,
+      "meta_fit_loss": 0.026927458820864558
+    },
+    {
+      "epoch": 20,
+      "meta_fit_loss": 0.014511218294501305
+    },
+    {
+      "epoch": 21,
+      "meta_fit_loss": 0.017902598396176472
+    },
+    {
+      "epoch": 22,
+      "meta_fit_loss": 0.02051738032605499
+    },
+    {
+      "epoch": 23,
+      "meta_fit_loss": 0.011558121328562265
+    },
+    {
+      "epoch": 24,
+      "meta_fit_loss": 0.012442687526345253
+    },
+    {
+      "epoch": 25,
+      "meta_fit_loss": 0.011629811895545572
+    },
+    {
+      "epoch": 26,
+      "meta_fit_loss": 0.01420281920582056
+    },
+    {
+      "epoch": 27,
+      "meta_fit_loss": 0.014224256505258381
+    },
+    {
+      "epoch": 28,
+      "meta_fit_loss": 0.011862158033181913
+    },
+    {
+      "epoch": 29,
+      "meta_fit_loss": 0.00999557062459644
+    },
+    {
+      "epoch": 30,
+      "meta_fit_loss": 0.01622565196157666
+    }
+  ]
+}

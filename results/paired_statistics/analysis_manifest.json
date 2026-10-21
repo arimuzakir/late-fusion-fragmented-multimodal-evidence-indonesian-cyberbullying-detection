@@ -1,0 +1,69 @@
+{
+  "analysis_name": "equal_vat_paired_source_group_addendum",
+  "analysis_date": "2026-10-21",
+  "source_protocol": "v6_reviewer_experiments_20261020_v1",
+  "primary_seed": 42,
+  "n_rows": 3951,
+  "n_source_groups": 214,
+  "bootstrap_replicates": 2000,
+  "permutation_replicates": 2000,
+  "comparison_selection_status": "post-hoc manuscript-focused; equal_vat selected after primary point estimates were available",
+  "inputs": {
+    "VIDEO_OOF_PREDICTIONS.csv": "0f92849ada3f785cd280f7e0da41cda07a44be50d7c223a14e03d7c127c4c1a8",
+    "VIDEO_PAIRED_GROUP_STATISTICS.csv": "7c95cf1fb6a2885a4ee73befc90de91581288f8c28775f08b431eed84dcd5138",
+    "V6_Reviewer_Experiments_L4.ipynb": "61e5f2212dcd23e83430838ef45711f3dc76f642e957b1ea798683e1d3e8321a"
+  },
+  "new_comparisons": [
+    {
+      "candidate": "equal_vat",
+      "baseline": "text",
+      "analysis_seed": 20261027,
+      "delta_macro_f1": 0.0026061142528192027,
+      "ci_low": -0.013821927098612649,
+      "ci_high": 0.01903815207232888,
+      "raw_p": 0.760119940029985,
+      "holm_p_4": 0.760119940029985,
+      "holm_p_11": 1.0
+    },
+    {
+      "candidate": "equal_vat",
+      "baseline": "visual",
+      "analysis_seed": 20261028,
+      "delta_macro_f1": 0.03339184696779307,
+      "ci_low": 0.004167119085883774,
+      "ci_high": 0.06170267945072274,
+      "raw_p": 0.025987006496751622,
+      "holm_p_4": 0.07796101949025487,
+      "holm_p_11": 0.25987006496751625
+    },
+    {
+      "candidate": "equal_vat",
+      "baseline": "siglip2_vta_probe",
+      "analysis_seed": 20261029,
+      "delta_macro_f1": 0.031157761423107888,
+      "ci_low": 0.0013268954270219209,
+      "ci_high": 0.059371832065622764,
+      "raw_p": 0.0384807596201899,
+      "holm_p_4": 0.07796101949025487,
+      "holm_p_11": 0.34632683658170915
+    },
+    {
+      "candidate": "equal_vat",
+      "baseline": "healnet_adapted_2024",
+      "analysis_seed": 20261030,
+      "delta_macro_f1": 0.053886047956386185,
+      "ci_low": 0.02552985467924525,
+      "ci_high": 0.08497564791721647,
+      "raw_p": 0.0014992503748125937,
+      "holm_p_4": 0.005997001499250375,
+      "holm_p_11": 0.01649175412293853
+    }
+  ],
+  "interpretation": "No statistical superiority over text-only; visual and SigLIP2 VTA contrasts do not survive Holm correction; HEALNet contrast remains significant.",
+  "outputs": {
+    "VIDEO_EQUAL_VAT_PAIRED_GROUP_STATISTICS.csv": "e60fff6ead95c3d207b9c1a0f6209999af82939646475191194afbcf1cd680fe",
+    "VIDEO_PAIRED_GROUP_STATISTICS_EXTENDED.csv": "e514f1abc356bd8128252acd41089fa4e471e6ff4017dbfa66115a90d2bb8583",
+    "VIDEO_EQUAL_VAT_STATISTICAL_ADDENDUM.md": "6a9a285c4c183e7d610dafba19b8d18e84fa3ab08da3f744e089b3f9e0f0de31",
+    "run_equal_vat_paired_statistics.py": "9d9e4ce152f6da86f6f3d6bdea66ac1bf589867d0ea815fbde71ca313b7ee4ea"
+  }
+}
