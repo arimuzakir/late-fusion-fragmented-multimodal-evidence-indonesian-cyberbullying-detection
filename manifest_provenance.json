@@ -12,12 +12,16 @@
     "sha256": "a7a6f2300b3aa61006a38df947adbf4781272bbe58e50f8c2ec7996066b2a08b"
   },
   "README.md": {
-    "bytes": 5779,
-    "sha256": "de136e9c7db9dc0c4ffbece63f8f0acb7320936cf5775c17023466a6d8aad0e9"
+    "bytes": 7688,
+    "sha256": "d909495d711199d2840a107def0b665492e18a54b9d1d6006b68c48f04fbf0c6"
   },
   "artifacts/comment_splits.csv": {
     "bytes": 981339,
     "sha256": "055f495aa6a000ac0be12131ee9f8ebd2a67138701232454e3114df614d29c26"
+  },
+  "artifacts/recovery_validation.csv": {
+    "bytes": 47074,
+    "sha256": "8dd14400254c6c3c67773f9c18c98092b6626f64543a68d1b9244ba6221f15a2"
   },
   "artifacts/siglip2_frozen_features.npz": {
     "bytes": 13531296,
@@ -76,8 +80,8 @@
     "sha256": "417e22b2ddb4157e81ac47ad0dd89d849bb0495a8c1138c671c2d5b837dad536"
   },
   "docs/methods_and_claim_boundaries.md": {
-    "bytes": 4532,
-    "sha256": "8ba0994e6c3c7648c32ef9fb4a448c9916781725a6de6ed92fc2368d44db8134"
+    "bytes": 5033,
+    "sha256": "f73ea2dc0f16fe7e5da4d8c6ab398eab06f2d5b6e2dc5c3975802c5814db6d62"
   },
   "docs/statistical_addendum.md": {
     "bytes": 6008,
@@ -1600,8 +1604,8 @@
     "sha256": "d5b89a4ebb3db04f57523ddc2e476f012287ba8af67df33663a44f5b8829af8d"
   },
   "src/regenerate_tables.py": {
-    "bytes": 7364,
-    "sha256": "9b221d88cda1a464c5c21ff6f08a1908ce50ec4fdaf302b5aae807b2946dbf4a"
+    "bytes": 10299,
+    "sha256": "9791de2ad220ac24e5cc7e255bd2f559e7660fac11e223b577368feaa2c35f2e"
   },
   "src/vendor/HEALNET_LICENSE": {
     "bytes": 11357,
