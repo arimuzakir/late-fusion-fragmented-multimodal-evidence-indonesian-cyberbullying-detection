@@ -258,7 +258,7 @@ def generate_figure_7():
 
 
 def generate_figure_8():
-    """Fig. 8: Decision threshold comparison (0.50 vs calibrated)."""
+    """Fig. 8: Decision cutoff comparison (0.50 vs selected cutoff)."""
     csv_path = RESULTS_DIR / "video_seed_metrics.csv"
     if not csv_path.exists():
         print(f"Skipping Fig 8: {csv_path} not found")
@@ -331,11 +331,11 @@ def generate_figure_8():
     ax.set_xlim(0.33, 0.66)
     ax.set_ylim(-0.6, len(paired_data) - 0.4)
     ax.set_xlabel("Macro F1 Score (N = 3,951 Video Segments)", fontsize=11, fontweight="bold", labelpad=8)
-    ax.set_title("Fig. 8: Decision Threshold Comparison (Default 0.50 vs. Selected $\\tau^*$)", fontsize=12.5, fontweight="bold", loc="left", pad=14, color=BASE_DARK)
+    ax.set_title("Fig. 8: Decision Cutoff Comparison (Default 0.50 vs. Selected $\\tau^*$)", fontsize=12.5, fontweight="bold", loc="left", pad=14, color=BASE_DARK)
 
     legend_elements = [
-        Line2D([0], [0], marker="o", color="w", markerfacecolor=BASE_GRAY, markeredgecolor=BASE_DARK, markersize=9, label="Default Threshold (t = 0.50)"),
-        Line2D([0], [0], marker="o", color="w", markerfacecolor=BASE_GREEN, markeredgecolor=BASE_DARK, markersize=10, label="Selected Threshold (t = $\\tau^*$)"),
+        Line2D([0], [0], marker="o", color="w", markerfacecolor=BASE_GRAY, markeredgecolor=BASE_DARK, markersize=9, label="Default Cutoff (t = 0.50)"),
+        Line2D([0], [0], marker="o", color="w", markerfacecolor=BASE_GREEN, markeredgecolor=BASE_DARK, markersize=10, label="Selected Cutoff (t = $\\tau^*$)"),
     ]
     ax.legend(handles=legend_elements, loc="lower right", frameon=True, fontsize=9.0)
 

@@ -1,0 +1,14 @@
+evaluation_level,rater_1,rater_2,comparison,sample_size_n,dataset_version,metric,value_raw,value_reported,interpretation
+annotator_pairwise,anotator_1,anotator_2,anotator_1 vs anotator_2,13307,dataset_master_13307_labeled,cohen_kappa,0.891583343642,0.8916,"Almost Perfect Agreement (Landis & Koch, 1977)"
+annotator_pairwise,anotator_1,anotator_3,anotator_1 vs anotator_3,13307,dataset_master_13307_labeled,cohen_kappa,0.875319940677,0.8753,"Almost Perfect Agreement (Landis & Koch, 1977)"
+annotator_pairwise,anotator_1,anotator_4,anotator_1 vs anotator_4,13307,dataset_master_13307_labeled,cohen_kappa,0.795122874122,0.7951,"Almost Perfect Agreement (Landis & Koch, 1977)"
+annotator_pairwise,anotator_1,anotator_5,anotator_1 vs anotator_5,13307,dataset_master_13307_labeled,cohen_kappa,0.901482280232,0.9015,"Almost Perfect Agreement (Landis & Koch, 1977)"
+annotator_pairwise,anotator_2,anotator_3,anotator_2 vs anotator_3,13307,dataset_master_13307_labeled,cohen_kappa,0.883991220610,0.8840,"Almost Perfect Agreement (Landis & Koch, 1977)"
+annotator_pairwise,anotator_2,anotator_4,anotator_2 vs anotator_4,13307,dataset_master_13307_labeled,cohen_kappa,0.900447340013,0.9004,"Almost Perfect Agreement (Landis & Koch, 1977)"
+annotator_pairwise,anotator_2,anotator_5,anotator_2 vs anotator_5,13307,dataset_master_13307_labeled,cohen_kappa,0.897516267063,0.8975,"Almost Perfect Agreement (Landis & Koch, 1977)"
+annotator_pairwise,anotator_3,anotator_4,anotator_3 vs anotator_4,13307,dataset_master_13307_labeled,cohen_kappa,0.895774208469,0.8958,"Almost Perfect Agreement (Landis & Koch, 1977)"
+annotator_pairwise,anotator_3,anotator_5,anotator_3 vs anotator_5,13307,dataset_master_13307_labeled,cohen_kappa,0.922353219781,0.9224,"Almost Perfect Agreement (Landis & Koch, 1977)"
+annotator_pairwise,anotator_4,anotator_5,anotator_4 vs anotator_5,13307,dataset_master_13307_labeled,cohen_kappa,0.891449609855,0.8914,"Almost Perfect Agreement (Landis & Koch, 1977)"
+annotator_summary,all_5_annotators,unweighted_mean_pairwise,mean_of_10_pairwise_combinations,13307,dataset_master_13307_labeled,mean_cohen_kappa,0.885504030446,0.8855,"Almost Perfect Agreement (Landis & Koch, 1977)"
+annotator_group,all_5_annotators,fixed_raters_group,fleiss_multirater_agreement,13307,dataset_master_13307_labeled,fleiss_kappa,0.885301565611,0.8853,"Almost Perfect Agreement (Landis & Koch, 1977)"
+expert_audit,pakar_1_linguistik_forensik,pakar_2_psikologi_anak,expert_1_vs_expert_2,1331,stratified_audit_subsample_10pct,cohen_kappa,0.907471548738,0.9075,Inter-Expert Concordance on 10% Stratified Audit Subsample

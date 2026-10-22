@@ -244,6 +244,14 @@ def display_paired_contrasts():
         })
         print(df4_show.to_string(index=False))
 
+    # Computation mode documentation note
+    print("\nNote on Computation Mode:")
+    print("  - Table 1, 2, and 3 metrics (Accuracy, Macro F1, ROC-AUC, AP) are computed")
+    print("    dynamically on-the-fly from out-of-fold and held-out prediction CSVs.")
+    print("  - Paired contrast statistics (2,000-resample cluster bootstrap 95% CIs and 10,000")
+    print("    group-level permutation tests) are loaded from precomputed statistical audit files")
+    print("    for instant sub-second execution (~1.7s on CPU). Full recomputation routines are")
+    print("    implemented in notebooks/run_experiments.ipynb (~15 min on standard CPU).")
     print("=" * 95)
 
 

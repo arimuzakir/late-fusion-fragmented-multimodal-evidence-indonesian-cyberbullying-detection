@@ -79,7 +79,7 @@ The primary evaluation protocol spans two corpora under strict source-disjoint p
 | SigLIP 2 visual–text probe | 0.5278 | 0.5381 | 0.5278 ± 0.0000 | 0.5598 | 0.6465 |
 | SigLIP 2 VTA probe | 0.5304 | 0.5415 | 0.5304 ± 0.0000 | 0.5632 | 0.6476 |
 
-Equal late fusion (VAT) achieves 0.5615 macro F1 at its calibrated threshold. When tested under source-paired group permutations, equal late fusion shows significant improvement over HEALNet adaptation (Δ = +0.0539, 11-contrast Holm p = 0.0165), while differences against visual-only (p = 0.2599), SigLIP 2 VTA probe (p = 0.3463), and extracted text (p = 1.0000) are not statistically significant after multiplicity adjustment.
+Equal late fusion (VAT) achieves 0.5615 macro F1 at its selected cutoff ($\tau^* = 0.575$ on Seed 42). When tested under source-paired group permutations, equal late fusion shows significant improvement over HEALNet adaptation (Δ = +0.0539, 11-contrast Holm p = 0.0165), while differences against visual-only (p = 0.2599), SigLIP 2 VTA probe (p = 0.3463), and extracted text (p = 1.0000) are not statistically significant after multiplicity adjustment.
 
 ## Repository structure
 
@@ -115,7 +115,7 @@ pip install -r requirements.txt
 ```bash
 python src/regenerate_tables.py
 ```
-This script recomputes Tables 1, 2, and 3, along with primary 7-contrast and exploratory 4-contrast Holm-adjusted paired permutation tests directly from stored out-of-fold predictions. Verified execution time: ~1.7 seconds on a standard CPU.
+This script computes Table 1, 2, and 3 evaluation metrics dynamically on-the-fly from stored out-of-fold and held-out prediction CSVs. Paired contrast statistics (2,000-sample bootstrap 95% CIs and 10,000 group-level permutation tests) are loaded from precomputed statistical audit files for instant sub-second execution (~1.7s on CPU). Full recomputation of permutation tests and bootstrap intervals can be executed via `notebooks/run_experiments.ipynb` (~15 min runtime).
 
 ### Reproduce empirical figures
 ```bash
@@ -126,7 +126,7 @@ This script regenerates the empirical plots:
 - `fig_05_fusion_differences.png`: Source-paired differences forest plot
 - `fig_06_seed_stability.png`: Multi-seed stability trajectory
 - `fig_07_extraction_availability.png`: Performance across OCR/STT strata
-- `fig_08_threshold_sensitivity.png`: Decision threshold comparison (0.50 vs calibrated)
+- `fig_08_threshold_sensitivity.png`: Decision cutoff comparison (0.50 vs selected cutoff)
 
 Figures 1, 2, and 3 are conceptual diagrams (corpus composition, fusion architecture, and nested CV protocol) extracted from the manuscript OpenXML media and provided as reference assets under `figures/`.
 
@@ -136,13 +136,20 @@ To re-extract features and retrain encoders from scratch on GPU hardware, execut
 
 ## Checkpoints and data provenance
 
-Out-of-fold sample predictions, decision cutoffs, and feature representations are preserved under `results/` and `artifacts/`. Intermediate `meta_fit` and `calibration` predictions were reconstructed from frozen representations and fitted meta-learners without refitting, exactly matching historical cutoffs across all 360 configurations (verified in `artifacts/recovery_validation.csv`).
+Out-of-fold sample predictions, decision cutoffs, and feature representations are preserved under `results/` and `artifacts/`. Intermediate per-sample predictions for inner roles are archived per seed and fold:
+- `results/video/seed_{seed}/fold_{fold}/calibration_predictions.csv` (role: `threshold_selection`)
+- `results/video/seed_{seed}/fold_{fold}/meta_fit_predictions.csv` (role: `meta_fit`)
+- `results/video/seed_{seed}/fold_{fold}/test_predictions.csv` (role: `test`)
+
+Their integrity was independently verified without refitting:
+- `artifacts/threshold_selection_recovery_validation.csv`: Audits operating cutoffs on the validation split against historical `thresholds.json` (exact match, 0 discrepancies across 180 runs).
+- `artifacts/meta_fit_recovery_validation.csv`: Audits input/output feature alignment and frozen-branch representations on the meta-fit split (180 runs, 0 refitting).
 
 Due to child privacy protections and repository hosting limits, raw video files (.mp4), raw audio recordings (.wav), and large transformer weights (475 MB per model checkpoint) are not bundled in this Git release.
 
 ## Data ethics and annotation note
 
-- **Segment annotation**: Five independent native Indonesian annotators evaluated each segment. The Fleiss' kappa of 0.8853 and mean pairwise Cohen's kappa of 0.8851 were computed across the complete 13,307-record master collection. Final segment labels reflect majority voting (≥ 3/5).
+- **Segment annotation**: Five independent native Indonesian annotators evaluated each segment across the complete 13,307-record master collection (Fleiss' multi-rater κ = 0.8853; mean pairwise Cohen's κ across all 10 bilateral combinations = 0.8855, with individual pair kappas ranging from 0.7951 to 0.9224; exact mean = 0.885504030446). All 10 bilateral pair scores are itemized in `artifacts/inter_annotator_agreement_audit.csv`. Final segment labels reflect majority voting (≥ 3/5). Annotation guidelines and benchmark exemplars are archived in `docs/` as task definitions; empirical annotator execution timesheets/session logs are not currently available.
 - **Expert validation**: Two domain experts (Forensic Linguistics and Child Psychology) evaluated a stratified subsample of 1,331 records, achieving an inter-expert Cohen's kappa of 0.9075. This measures expert consistency on the audit sample and is not a post-adjudication relabeling of the full segment dataset.
 - **Privacy protection**: Pre-computed features (`artifacts/siglip2_frozen_features.npz`) use consistent anonymous surrogate IDs (`CB_MASTER_XXXXX`). No raw usernames, profile URLs, or social media post identifiers are published.
 

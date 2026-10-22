@@ -1,8 +1,4 @@
 {
-  ".gitignore": {
-    "bytes": 580,
-    "sha256": "1f398834ddd63d25eafe1ab3dbb0a6774209b8c2b59f3973cffa477a10a5dfc6"
-  },
   "CITATION.cff": {
     "bytes": 788,
     "sha256": "616b1d5fb89c77f885ba52bd54587bf6928eeda412696b824c104c519c960296"
@@ -12,20 +8,28 @@
     "sha256": "a7a6f2300b3aa61006a38df947adbf4781272bbe58e50f8c2ec7996066b2a08b"
   },
   "README.md": {
-    "bytes": 8969,
-    "sha256": "f341034d0fee39efc253f8043991564cbdcf08eb62863c64cdf7119953dd1a33"
+    "bytes": 10114,
+    "sha256": "2052673e726dad6f3e5e72722432e8fca40841fb85c395f809658b1d548220ee"
   },
   "artifacts/comment_splits.csv": {
     "bytes": 981339,
     "sha256": "055f495aa6a000ac0be12131ee9f8ebd2a67138701232454e3114df614d29c26"
   },
-  "artifacts/recovery_validation.csv": {
-    "bytes": 47074,
-    "sha256": "8dd14400254c6c3c67773f9c18c98092b6626f64543a68d1b9244ba6221f15a2"
+  "artifacts/inter_annotator_agreement_audit.csv": {
+    "bytes": 2592,
+    "sha256": "2e763343867d2170c4e0e2c2c2a68a8d18fb50a15dd89cb083a1d59e22956fdb"
+  },
+  "artifacts/meta_fit_recovery_validation.csv": {
+    "bytes": 34648,
+    "sha256": "718869b0596856b607ae821b1c7b9356abe5cef31c40dacdb3701b1b9829b378"
   },
   "artifacts/siglip2_frozen_features.npz": {
     "bytes": 13531296,
     "sha256": "9ad7e603e42864796e70f11240ce468e4acd75728e33483a21b3c5e5cc0af1e1"
+  },
+  "artifacts/threshold_selection_recovery_validation.csv": {
+    "bytes": 38842,
+    "sha256": "32a42fc69d432c035c8cfc298897f59d8cd6c1e4a5e7644d4fb8fcf2a31d1d60"
   },
   "artifacts/video_alignment_audit.csv": {
     "bytes": 525011,
@@ -80,8 +84,8 @@
     "sha256": "417e22b2ddb4157e81ac47ad0dd89d849bb0495a8c1138c671c2d5b837dad536"
   },
   "docs/methods_and_claim_boundaries.md": {
-    "bytes": 5033,
-    "sha256": "f73ea2dc0f16fe7e5da4d8c6ab398eab06f2d5b6e2dc5c3975802c5814db6d62"
+    "bytes": 5909,
+    "sha256": "cef67e4ea100da0f639cc489db7b70996b5b98813e1d424e75da7eb23849ef3a"
   },
   "docs/statistical_addendum.md": {
     "bytes": 6008,
@@ -116,16 +120,16 @@
     "sha256": "3ed28e96d0192a7b4b9f04f2c12928f3e787e98ade0b2ef61238bf79d3f73285"
   },
   "figures/fig_08_threshold_sensitivity.png": {
-    "bytes": 262413,
-    "sha256": "f4aab45117b8a9176fd33bc881e0fa2277bea0e49b8b8d824c44bceec2303173"
+    "bytes": 261553,
+    "sha256": "f6ef49a64d439b7ebffbbc22219a65c0ae9820c586c48fffd313136ea684c890"
   },
   "notebooks/run_experiments.ipynb": {
     "bytes": 1839001,
     "sha256": "37952aa0abdd8e2dd56983609f1d99ae0a832bd81dd83708a124dbd1398dfe4e"
   },
   "requirements.txt": {
-    "bytes": 190,
-    "sha256": "ed68881332c75a358eec711b676f84dd7da27f59793188808cd593ee186022bc"
+    "bytes": 203,
+    "sha256": "5a586a92a4d89197821e85dad7110eb852074526c1e8a08e013aec359fbb82d5"
   },
   "results/comment_cluster_ci.csv": {
     "bytes": 393,
@@ -1600,12 +1604,12 @@
     "sha256": "523000291f97f6b5c010a1748603ada3a8e86672087273a977f35cebc81eb234"
   },
   "src/regenerate_figures.py": {
-    "bytes": 14095,
-    "sha256": "d5b89a4ebb3db04f57523ddc2e476f012287ba8af67df33663a44f5b8829af8d"
+    "bytes": 14088,
+    "sha256": "9704ecb30f1f08e92283757471e955d94fed3c661896b7d34ee4545c4255963a"
   },
   "src/regenerate_tables.py": {
-    "bytes": 10299,
-    "sha256": "9791de2ad220ac24e5cc7e255bd2f559e7660fac11e223b577368feaa2c35f2e"
+    "bytes": 10945,
+    "sha256": "def831def538584bfdd593d27033e33aa3a8afbbb9674702496d3596ffb3279e"
   },
   "src/vendor/HEALNET_LICENSE": {
     "bytes": 11357,
