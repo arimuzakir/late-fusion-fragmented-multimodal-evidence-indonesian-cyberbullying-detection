@@ -113,9 +113,13 @@ pip install -r requirements.txt
 
 ### Reproduce tables and statistical tests
 ```bash
+# Default mode: instant evaluation on-the-fly with precomputed contrast statistics (~0.2s)
 python src/regenerate_tables.py
+
+# Live Monte Carlo mode: recomputes 2,000 cluster-bootstraps and 2,000 group-permutations live (~0.8s)
+python src/regenerate_tables.py --recompute
 ```
-This script computes Table 1, 2, and 3 evaluation metrics dynamically on-the-fly from stored out-of-fold and held-out prediction CSVs. Paired contrast statistics (2,000-sample bootstrap 95% CIs and 10,000 group-level permutation tests) are loaded from precomputed statistical audit files for instant sub-second execution (~1.7s on CPU). Full recomputation of permutation tests and bootstrap intervals can be executed via `notebooks/run_experiments.ipynb` (~15 min runtime).
+This script computes Table 1, 2, and 3 evaluation metrics dynamically on-the-fly from stored out-of-fold and held-out prediction CSVs. Paired contrast statistics (2,000-sample cluster-bootstrap 95% CIs and 2,000 paired group permutations per contrast, matching `configs/experiment_config.json`) are loaded by default from precomputed statistical audit files for instant execution (~0.2s on CPU). Passing `--recompute` executes the live vectorized resampling directly from prediction columns in ~0.8s on CPU. Full end-to-end retraining routines are provided in `notebooks/run_experiments.ipynb`.
 
 ### Reproduce empirical figures
 ```bash
@@ -145,7 +149,8 @@ Their integrity was independently verified without refitting:
 - `artifacts/threshold_selection_recovery_validation.csv`: Audits operating cutoffs on the validation split against historical `thresholds.json` (exact match, 0 discrepancies across 180 runs).
 - `artifacts/meta_fit_recovery_validation.csv`: Audits input/output feature alignment and frozen-branch representations on the meta-fit split (180 runs, 0 refitting).
 
-Due to child privacy protections and repository hosting limits, raw video files (.mp4), raw audio recordings (.wav), and large transformer weights (475 MB per model checkpoint) are not bundled in this Git release.
+**Reproduction boundaries for raw media and extraction pipelines:**
+Video speech-to-text transcripts (Whisper) and on-screen text extractions (OCR), along with 16-dimensional acoustic feature vectors and SigLIP 2 representations, are provided in pre-extracted, frozen, and aligned form in `artifacts/video_primary_manifest.csv` and `artifacts/siglip2_frozen_features.npz`. In accordance with child privacy protection regulations and repository hosting quotas, raw full-length video recordings (.mp4), raw audio waveforms (.wav), and large transformer model checkpoints (475 MB per model) are not distributed in this Git repository. Branch representations are frozen during late fusion evaluation as described in `docs/methods_and_claim_boundaries.md`.
 
 ## Data ethics and annotation note
 

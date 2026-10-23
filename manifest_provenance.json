@@ -8,8 +8,8 @@
     "sha256": "a7a6f2300b3aa61006a38df947adbf4781272bbe58e50f8c2ec7996066b2a08b"
   },
   "README.md": {
-    "bytes": 10114,
-    "sha256": "2052673e726dad6f3e5e72722432e8fca40841fb85c395f809658b1d548220ee"
+    "bytes": 11012,
+    "sha256": "3ea99471dbac7b8a93e1a4fccdff49dae40bd684566825406dcc36479d08cb71"
   },
   "artifacts/comment_splits.csv": {
     "bytes": 981339,
@@ -1608,8 +1608,8 @@
     "sha256": "9704ecb30f1f08e92283757471e955d94fed3c661896b7d34ee4545c4255963a"
   },
   "src/regenerate_tables.py": {
-    "bytes": 10945,
-    "sha256": "def831def538584bfdd593d27033e33aa3a8afbbb9674702496d3596ffb3279e"
+    "bytes": 15620,
+    "sha256": "5cfdbb4bd73b1698fd6fb37b475c1e6289838ed03baaaed3eb1f94e06c520331"
   },
   "src/vendor/HEALNET_LICENSE": {
     "bytes": 11357,

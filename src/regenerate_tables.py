@@ -7,6 +7,7 @@ Authors: Ari Muzakir, Usman Ependi, Suyanto (2026)
 """
 
 from pathlib import Path
+import argparse
 import json
 import numpy as np
 import pandas as pd
@@ -210,7 +211,107 @@ def display_table_3():
     print("=" * 95)
 
 
-def display_paired_contrasts():
+def holm_adjust(p_values):
+    p_values = np.asarray(p_values, dtype=float)
+    m = len(p_values)
+    order = np.argsort(p_values)
+    ranks = np.empty_like(order)
+    ranks[order] = np.arange(m)
+    sorted_p = p_values[order]
+    adj = sorted_p * (m - np.arange(m))
+    adj = np.maximum.accumulate(adj)
+    adj = np.minimum(1.0, adj)
+    return adj[ranks]
+
+
+def recompute_live_contrasts(B=2000, P=2000):
+    print("\n" + "=" * 95)
+    print("LIVE RECOMPUTATION OF STATISTICAL CONTRASTS & HOLM ADJUSTMENTS")
+    print(f"Cluster Bootstrap Replicates: B = {B:,} | Group Permutations: P = {P:,}")
+    print("=" * 95)
+
+    oof_path = RESULTS_DIR / "video_oof_predictions.csv"
+    if not oof_path.exists():
+        print(f"Error: {oof_path} not found.")
+        return
+
+    df_oof = pd.read_csv(oof_path)
+    df_oof = df_oof[df_oof["seed"] == 42].reset_index(drop=True)
+    y = df_oof["label_final"].values
+    groups, group_indices = np.unique(df_oof["group_id"], return_inverse=True)
+    G = len(groups)
+
+    def get_group_counts(pred_col):
+        pred = df_oof[pred_col].values
+        c = np.zeros((G, 4))
+        for k, (a, b) in enumerate([(1, 1), (1, 0), (0, 1), (0, 0)]):
+            np.add.at(c[:, k], group_indices, ((y == a) & (pred == b)).astype(float))
+        return c
+
+    def macro_f1_from_counts(c):
+        tp, fn, fp, tn = c[..., 0], c[..., 1], c[..., 2], c[..., 3]
+        f1p = 2 * tp / np.maximum(2 * tp + fp + fn, 1e-12)
+        f1n = 2 * tn / np.maximum(2 * tn + fn + fp, 1e-12)
+        return (f1p + f1n) / 2
+
+    def run_paired_test(cand_col, base_col, seed):
+        cand_c = get_group_counts(cand_col)
+        base_c = get_group_counts(base_col)
+        d = macro_f1_from_counts(cand_c.sum(0)) - macro_f1_from_counts(base_c.sum(0))
+        rng = np.random.default_rng(seed)
+        w = rng.multinomial(G, np.ones(G) / G, size=B).astype(float)
+        bd = macro_f1_from_counts(w @ cand_c) - macro_f1_from_counts(w @ base_c)
+        ci_low, ci_high = np.percentile(bd, [2.5, 97.5])
+        s = rng.choice([-1, 1], size=(P, G)).astype(float)
+        perm = np.empty(P)
+        for i in range(P):
+            m = (s[i] > 0)[:, None]
+            perm[i] = macro_f1_from_counts(np.where(m, cand_c, base_c).sum(0)) - macro_f1_from_counts(np.where(m, base_c, cand_c).sum(0))
+        p = (1 + np.sum(np.abs(perm) >= abs(d) - 1e-15)) / (P + 1)
+        return d, ci_low, ci_high, p
+
+    # 1. Primary Planned Contrasts (Seed 20261020)
+    p7_baselines = ["visual", "vat_lr", "vat_flags", "coverage_only", "coverage_shuffled_control", "healnet_adapted_2024", "siglip2_vta_probe"]
+    rows7 = []
+    p_vals7 = []
+    for b in p7_baselines:
+        d, lo, hi, p = run_paired_test("vat_coverage_prediction", f"{b}_prediction", 20261020)
+        rows7.append({"Baseline": b, "Delta Macro F1": f"{d:+.4f}", "95% CI": f"[{lo:+.4f}, {hi:+.4f}]", "Permutation p": p})
+        p_vals7.append(p)
+    p7_holm = holm_adjust(p_vals7)
+    for i, r in enumerate(rows7):
+        r["Permutation p"] = f"{p_vals7[i]:.4f}"
+        r["p-Holm (7 primary contrasts)"] = f"{p7_holm[i]:.4f}"
+
+    print("\n1. Primary Planned Contrasts (Live Recomputed from Out-of-Fold Predictions):")
+    print(pd.DataFrame(rows7).to_string(index=False))
+
+    # 2. Exploratory Contrasts (Seed 20261027)
+    p4_baselines = ["text", "visual", "siglip2_vta_probe", "healnet_adapted_2024"]
+    rows4 = []
+    p_vals4 = []
+    for b in p4_baselines:
+        d, lo, hi, p = run_paired_test("equal_vat_prediction", f"{b}_prediction", 20261027)
+        rows4.append({"Baseline": b, "Delta Macro F1": f"{d:+.4f}", "95% CI": f"[{lo:+.4f}, {hi:+.4f}]", "Permutation p": p})
+        p_vals4.append(p)
+    p4_holm = holm_adjust(p_vals4)
+    p11_all = list(p_vals7) + list(p_vals4)
+    p11_holm = holm_adjust(p11_all)
+    for i, r in enumerate(rows4):
+        r["Permutation p"] = f"{p_vals4[i]:.4f}"
+        r["p-Holm (4 exploratory contrasts)"] = f"{p4_holm[i]:.4f}"
+        r["p-Holm (11 extended contrasts)"] = f"{p11_holm[len(p7_baselines) + i]:.4f}"
+
+    print("\n2. Exploratory Contrasts (Live Recomputed from Out-of-Fold Predictions):")
+    print(pd.DataFrame(rows4).to_string(index=False))
+    print("=" * 95)
+
+
+def display_paired_contrasts(recompute=False):
+    if recompute:
+        recompute_live_contrasts(B=2000, P=2000)
+        return
+
     print("\n" + "=" * 95)
     print("SUPPLEMENTARY STATISTICAL CONTRASTS & HOLM MULTIPLICITY ADJUSTMENTS")
     print("=" * 95)
@@ -248,15 +349,20 @@ def display_paired_contrasts():
     print("\nNote on Computation Mode:")
     print("  - Table 1, 2, and 3 metrics (Accuracy, Macro F1, ROC-AUC, AP) are computed")
     print("    dynamically on-the-fly from out-of-fold and held-out prediction CSVs.")
-    print("  - Paired contrast statistics (2,000-resample cluster bootstrap 95% CIs and 10,000")
-    print("    group-level permutation tests) are loaded from precomputed statistical audit files")
-    print("    for instant sub-second execution (~1.7s on CPU). Full recomputation routines are")
-    print("    implemented in notebooks/run_experiments.ipynb (~15 min on standard CPU).")
+    print("  - Paired contrast statistics (2,000-resample cluster bootstrap 95% CIs and 2,000")
+    print("    paired group permutations per contrast) are loaded from precomputed statistical audit files")
+    print("    for instant sub-second execution (~0.2s on CPU).")
+    print("  - To recompute all bootstrap CIs and permutation tests live from raw predictions, run:")
+    print("      python src/regenerate_tables.py --recompute")
     print("=" * 95)
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Regenerate Manuscript Tables and Statistical Contrasts.")
+    parser.add_argument("--recompute", action="store_true", help="Recompute cluster-bootstrap CIs and paired group permutations live on the fly from OOF predictions.")
+    args = parser.parse_args()
+
     display_table_1()
     display_table_2()
     display_table_3()
-    display_paired_contrasts()
+    display_paired_contrasts(recompute=args.recompute)
